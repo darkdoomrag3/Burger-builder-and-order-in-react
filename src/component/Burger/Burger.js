@@ -3,14 +3,25 @@ import BurgerIngridiants from './BurgerIngridiants/BurgerIngridiants'
 import './burger.css'
 
 const Burger = (props) => {
+   
+    const showIngrediant = Object.keys(props.ingrediant)
+   .map(igKey=>{
+    return [...Array(props.ingrediant[igKey])].map((_,i)=>{
+        return <BurgerIngridiants type={igKey} key={igKey + 1} />
+    })
+
+   })
+   
+   
     return (
         <div className="Burger">
             <BurgerIngridiants type="bread-top"/>
-            <BurgerIngridiants type="meat"/>
-            <BurgerIngridiants  type ="salad"/>
+            {
+                showIngrediant
+            }
             <BurgerIngridiants type="bread-bottom" />
         </div>
     )
 }
 
-export default Burger
+export default Burger;
