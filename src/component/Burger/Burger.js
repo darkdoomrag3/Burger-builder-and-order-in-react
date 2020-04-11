@@ -1,6 +1,6 @@
-import React from 'react'
-import BurgerIngridiants from './BurgerIngridiants/BurgerIngridiants'
-import './burger.css'
+import React from 'react';
+import BurgerIngridiants from './BurgerIngridiants/BurgerIngridiants';
+import './burger.css';
 
 const Burger = (props) => {
    
@@ -8,7 +8,9 @@ const Burger = (props) => {
    .map(igKey=>{
     return [...Array(props.ingrediant[igKey])].map((_,i)=>{
         return <BurgerIngridiants type={igKey} key={igKey + 1} />
-    })
+    }).reduce((arr,el)=>{
+       return arr.concat(el)
+    },[])
 
    })
    
