@@ -16,7 +16,11 @@ const BurgerControls = (props) => {
         <div className='BuildControls'>
 
         {controls.map(cntrl=>
-            <BurgerControl key={cntrl.label} label={cntrl.label} />
+            <BurgerControl key={cntrl.label} label={cntrl.label}
+            added={()=>props.addIngrediant(cntrl.type)   }
+            removed={()=>props.removeIngrediant(cntrl.type)}
+            
+            />
         )}
 
         </div>
