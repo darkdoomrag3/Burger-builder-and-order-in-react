@@ -18,9 +18,26 @@ class BagerMaker extends React.Component {
             bacon: 0,
             cheese: 0
         },
-        totalprice: 5
+        totalprice: 5,
+        purchased: false
 
     }
+
+
+    updatedPurchase(ingrediant) {
+        const sum = Object.keys(ingrediant)
+            .map(ingKey => {
+                return ingrediant[ingKey]
+            }).reduce((sum,el)=>{
+                return sum + el
+            },0)
+
+        this.setState({
+            purchased: sum > 0
+        })
+
+    }
+
 
     addIngrediant = (type) => {
         const oldCount = this.state.ingrediant[type];
@@ -30,15 +47,16 @@ class BagerMaker extends React.Component {
         }
 
         updatedIngrediant[type] = newCount;
-        const additionPrice = INGREDIANT_PRICE;
+        const additionPrice = INGREDIANT_PRICE[type];
         const oldPrice = this.state.totalprice;
         const newPrice = oldPrice + additionPrice;
         this.setState({ totalprice: newPrice, ingrediant: updatedIngrediant })
+        this.updatedPurchase(updatedIngrediant)
 
     }
 
 
-    removeIngrediant=(type)=>{
+    removeIngrediant = (type) => {
 
         const oldCount = this.state.ingrediant[type];
         const newCount = oldCount - 1;
@@ -46,15 +64,16 @@ class BagerMaker extends React.Component {
             ...this.state.ingrediant
         }
 
-        if(oldCount <=0){
+        if (oldCount <= 0) {
             return;
         }
 
         updatedIngrediant[type] = newCount;
-        const priceDiminished = INGREDIANT_PRICE;
+        const priceDiminished = INGREDIANT_PRICE[type];
         const oldPrice = this.state.totalprice;
         const newPrice = oldPrice - priceDiminished;
         this.setState({ totalprice: newPrice, ingrediant: updatedIngrediant })
+        this.updatedPurchase(updatedIngrediant)
 
     }
 
@@ -67,8 +86,8 @@ class BagerMaker extends React.Component {
                 <BurgerControls
                     addIngrediant={this.addIngrediant}
                     removeIngrediant={this.removeIngrediant}
-
-
+                    price={this.state.totalprice}
+                    
                 />
 
 

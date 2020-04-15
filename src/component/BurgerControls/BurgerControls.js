@@ -14,6 +14,7 @@ const controls = [
 const BurgerControls = (props) => {
     return (
         <div className='BuildControls'>
+        <p>current price : {props.price}</p>
 
         {controls.map(cntrl=>
             <BurgerControl key={cntrl.label} label={cntrl.label}
@@ -22,6 +23,8 @@ const BurgerControls = (props) => {
             
             />
         )}
+
+<button className='OrderButton'>Order Now</button>
 
         </div>
     )
