@@ -1,6 +1,9 @@
-import React from 'react'
-import Burger from '../component/Burger/Burger'
-import BurgerControls from '../component/BurgerControls/BurgerControls'
+import React from 'react';
+import Burger from '../component/Burger/Burger';
+import BurgerControls from '../component/BurgerControls/BurgerControls';
+import OrderSummery from '../component/OrderSummery/OrderSummery';
+import Modal from '../component/UI/Modal/Modal';
+
 
 const INGREDIANT_PRICE = {
     salad: 5,
@@ -28,9 +31,9 @@ class BagerMaker extends React.Component {
         const sum = Object.keys(ingrediant)
             .map(ingKey => {
                 return ingrediant[ingKey]
-            }).reduce((sum,el)=>{
+            }).reduce((sum, el) => {
                 return sum + el
-            },0)
+            }, 0)
 
         this.setState({
             purchased: sum > 0
@@ -82,12 +85,14 @@ class BagerMaker extends React.Component {
 
         return (
             <div>
+
+                <Modal> <OrderSummery ingrediant={this.state.ingrediant} />  </Modal>
                 <Burger ingrediant={this.state.ingrediant} />
                 <BurgerControls
                     addIngrediant={this.addIngrediant}
                     removeIngrediant={this.removeIngrediant}
                     price={this.state.totalprice}
-                    
+
                 />
 
 
