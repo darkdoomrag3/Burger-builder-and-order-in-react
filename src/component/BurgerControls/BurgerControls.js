@@ -24,7 +24,7 @@ const BurgerControls = (props) => {
             />
         )}
 
-<button className='OrderButton'>Order Now</button>
+<button className='OrderButton' onClick={props.ordered}>Order Now</button>
 
         </div>
     )

@@ -16,10 +16,12 @@ const OrderSummery = (props) => {
 
     return (
         <div>
+           <p>Your order List</p>
             <ul>
                 {summeryIngrediant}
             </ul>
 
+            <p>Total price : {props.price}</p>
 
         </div>
     )

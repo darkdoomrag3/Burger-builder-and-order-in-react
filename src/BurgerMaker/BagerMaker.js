@@ -22,7 +22,8 @@ class BagerMaker extends React.Component {
             cheese: 0
         },
         totalprice: 5,
-        purchased: false
+        purchased: false,
+        purchasing: false
 
     }
 
@@ -58,6 +59,10 @@ class BagerMaker extends React.Component {
 
     }
 
+    purchasingHandler = () => {
+        this.setState({ purchasing: true })
+    }
+
 
     removeIngrediant = (type) => {
 
@@ -86,12 +91,16 @@ class BagerMaker extends React.Component {
         return (
             <div>
 
-                <Modal> <OrderSummery ingrediant={this.state.ingrediant} />  </Modal>
+                <Modal show={this.state.purchasing}>
+                    <OrderSummery ingrediant={this.state.ingrediant} price={this.state.totalprice} />
+
+                </Modal>
                 <Burger ingrediant={this.state.ingrediant} />
                 <BurgerControls
                     addIngrediant={this.addIngrediant}
                     removeIngrediant={this.removeIngrediant}
                     price={this.state.totalprice}
+                    ordered={this.purchasingHandler}
 
                 />
 
