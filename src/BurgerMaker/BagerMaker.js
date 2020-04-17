@@ -90,6 +90,9 @@ class BagerMaker extends React.Component {
 
     }
 
+    purchaseContinue=()=>{
+        alert('You are continue!')
+    }
 
     render() {
 
@@ -97,7 +100,12 @@ class BagerMaker extends React.Component {
             <div>
 
                 <Modal show={this.state.purchasing} modalCanceld={this.purchasingCancelHandler} >
-                    <OrderSummery ingrediant={this.state.ingrediant} price={this.state.totalprice} />
+                    <OrderSummery ingrediant={this.state.ingrediant} price={this.state.totalprice} 
+                    purchasingCanceledHandler={this.purchasingCancelHandler}
+                    purchaseContinueHandler={this.purchaseContinue}
+                    
+                    
+                    />
 
                 </Modal>
                 <Burger ingrediant={this.state.ingrediant} />
