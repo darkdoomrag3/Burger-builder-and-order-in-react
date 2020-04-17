@@ -85,13 +85,18 @@ class BagerMaker extends React.Component {
 
     }
 
+    purchasingCancelHandler = () => {
+        this.setState({ purchasing: false })
+
+    }
+
 
     render() {
 
         return (
             <div>
 
-                <Modal show={this.state.purchasing}>
+                <Modal show={this.state.purchasing} modalCanceld={this.purchasingCancelHandler} >
                     <OrderSummery ingrediant={this.state.ingrediant} price={this.state.totalprice} />
 
                 </Modal>
