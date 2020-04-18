@@ -104,7 +104,6 @@ class BagerMaker extends React.Component {
                     purchasingCanceledHandler={this.purchasingCancelHandler}
                     purchaseContinueHandler={this.purchaseContinue}
                     
-                    
                     />
 
                 </Modal>
