@@ -3,6 +3,7 @@ import Burger from '../component/Burger/Burger';
 import BurgerControls from '../component/BurgerControls/BurgerControls';
 import OrderSummery from '../component/OrderSummery/OrderSummery';
 import Modal from '../component/UI/Modal/Modal';
+import axios from '../axios-order';
 
 
 const INGREDIANT_PRICE = {
@@ -91,7 +92,22 @@ class BagerMaker extends React.Component {
     }
 
     purchaseContinue=()=>{
-        alert('You are continue!')
+     
+        const order = {
+            ingrediant : this.state.ingrediant,
+            price : this.state.totlaprice,
+            customer : {
+                zipCode : '41281',
+                country : 'Canada',
+                name : 'Emad'
+            },
+            email : 'test@test.com'
+        }
+         axios.post('/orders.json',order)
+         .then(response=>{
+             console.log(response)
+         }).catch(error=>console.log(error))
+
     }
 
     render() {
