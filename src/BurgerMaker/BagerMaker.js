@@ -17,12 +17,7 @@ const INGREDIANT_PRICE = {
 class BagerMaker extends React.Component {
 
     state = {
-        ingrediant: {
-            meat: 0,
-            salad: 0,
-            bacon: 0,
-            cheese: 0
-        },
+        ingrediant: null,
         totalprice: 5,
         purchased: false,
         purchasing: false,
@@ -30,6 +25,12 @@ class BagerMaker extends React.Component {
 
     }
 
+    componentDidMount() {
+        axios.get('https://burger-bulder-638c4.firebaseio.com/ingrediant.json')
+            .then(response => {
+                this.setState({ ingrediant: response.data })
+            }).catch(error => { })
+    }
 
     updatedPurchase(ingrediant) {
         const sum = Object.keys(ingrediant)
@@ -89,7 +90,7 @@ class BagerMaker extends React.Component {
     }
 
     purchasingCancelHandler = () => {
-        this.setState({ purchasing: true })
+        this.setState({ purchasing: false })
 
     }
 
@@ -117,23 +118,14 @@ class BagerMaker extends React.Component {
 
     render() {
 
-        let orderSummery = <OrderSummery ingrediant={this.state.ingrediant} price={this.state.totalprice}
-            purchasingCanceledHandler={this.purchasingCancelHandler}
-            purchaseContinueHandler={this.purchaseContinue}
+        let orderSummery = null;
+        let burger = <Spinner />
 
-        />
+        if(this.state.ingrediant){
 
-        if (this.state.loading) {
-            orderSummery = <Spinner/>
-        }
 
-        return (
-            <div>
-
-                <Modal show={this.state.purchasing} modalCanceld={this.purchasingCancelHandler} >
-                    {orderSummery}
-
-                </Modal>
+         burger = (
+            <>
                 <Burger ingrediant={this.state.ingrediant} />
                 <BurgerControls
                     addIngrediant={this.addIngrediant}
@@ -143,6 +135,32 @@ class BagerMaker extends React.Component {
 
                 />
 
+
+            </>
+        )
+        orderSummery = <OrderSummery ingrediant={this.state.ingrediant} price={this.state.totalprice}
+            purchasingCanceledHandler={this.purchasingCancelHandler}
+            purchaseContinueHandler={this.purchaseContinue}
+
+        />
+        if (this.state.loading) {
+            orderSummery = <Spinner />
+
+        }
+
+    }
+        
+
+      
+        return (
+            <div>
+
+                <Modal show={this.state.purchasing} modalCanceld={this.purchasingCancelHandler} >
+                    {orderSummery}
+
+                </Modal>
+
+                {burger}
 
             </div>
         )
