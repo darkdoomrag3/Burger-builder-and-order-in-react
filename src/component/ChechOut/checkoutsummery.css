@@ -1,0 +1,12 @@
+.checkoutsummery{
+    width: 80%;
+    align-items: center;
+    margin: auto;
+}
+
+
+@media(min-width : 600px){
+    .checkoutsummery{
+        width: 500px;
+    }
+}

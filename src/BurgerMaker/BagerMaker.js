@@ -150,8 +150,6 @@ class BagerMaker extends React.Component {
 
     }
         
-
-      
         return (
             <div>
 
