@@ -112,6 +112,8 @@ class BagerMaker extends React.Component {
                 this.setState({ loading: false, purchasing: false })
             }).catch(error => this.setState({ loading: false, purchasing: false }))
 
+            this.props.history.push('/checkout')
+
     }
 
 
